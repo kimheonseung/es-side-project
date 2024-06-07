@@ -1,0 +1,36 @@
+version: '3.7'
+
+services:
+  es:
+    # image: elasticsearch:7.17.6
+    build:
+      context: ./
+      dockerfile: es-Dockerfile
+    container_name: es
+    environment:
+      - node.name=es-node
+      - cluster.name=es-cluster
+      - cluster.initial_master_nodes=es-node
+      - network.host=0.0.0.0
+      - bootstrap.memory_lock=true
+      - xpack.security.enabled=false
+      - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
+    volumes:
+      - ./data:/usr/share/elasticsearch/data
+      - ./log:/usr/share/elasticsearch/logs
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
+    ports:
+      - '9200:9200'
+      - '9300:9300'
+  kibana:
+    image: kibana:7.17.6
+    container_name: kibana
+    environment:
+      - ELASTICSEARCH_HOSTS=["http://es:9200"]
+    ports:
+      - '5601:5601'
+    depends_on:
+      - es

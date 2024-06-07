@@ -1,0 +1,40 @@
+{
+  "mappings": {
+    "properties": {
+      "id": {
+        "type": "keyword"
+      },
+      "title": {
+        "type": "text"
+      },
+      "author": {
+        "type": "keyword"
+      },
+      "genre": {
+        "type": "keyword"
+      },
+      "description": {
+        "type": "text"
+      },
+      "rating": {
+        "type": "double"
+      },
+      "date": {
+        "type": "date",
+        "format": "yyyy.MM.dd||yyyy.MM.dd HH:mm"
+      },
+      "completed": {
+        "type": "boolean"
+      },
+      "age": {
+        "type": "keyword"
+      },
+      "free": {
+        "type": "boolean"
+      },
+      "link": {
+        "type": "keyword"
+      }
+    }
+  }
+}
