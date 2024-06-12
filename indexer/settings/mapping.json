@@ -1,20 +1,67 @@
 {
+  "settings": {
+    "index": {
+      "analysis": {
+        "analyzer": {
+          "nori_analyzer_mixed": {
+            "tokenizer": "nori_tokenizer_mixed",
+            "filter": "stoptags_filter"
+          },
+          "nori_analyzer_none": {
+            "tokenizer": "nori_tokenizer_none",
+            "filter": "stoptags_filter"
+          }
+        },
+        "tokenizer": {
+          "nori_tokenizer_mixed": {
+            "type": "nori_tokenizer",
+            "decompound_mode": "mixed"
+          },
+          "nori_tokenizer_none": {
+            "type": "nori_tokenizer",
+            "decompound_mode": "none"
+          }
+        },
+        "filter": {
+          "stoptags_filter": {
+            "type": "nori_part_of_speech",
+            "stoptags": [
+              "J"
+            ]
+          }
+        }
+      }
+    }
+  },
   "mappings": {
     "properties": {
       "id": {
         "type": "keyword"
       },
       "title": {
-        "type": "text"
+        "type": "text",
+        "fields": {
+          "nori": {
+            "type": "text",
+            "analyzer": "nori_analyzer_mixed"
+          }
+        }
       },
       "author": {
-        "type": "keyword"
+        "type": "text",
+        "analyzer": "standard"
       },
       "genre": {
         "type": "keyword"
       },
       "description": {
-        "type": "text"
+        "type": "text",
+        "fields": {
+          "nori": {
+            "type": "text",
+            "analyzer": "nori_analyzer_mixed"
+          }
+        }
       },
       "rating": {
         "type": "double"
