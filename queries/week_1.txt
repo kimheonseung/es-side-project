@@ -1,0 +1,17 @@
+GET webtoons/_search
+{
+  "size": 20, 
+  "query": {
+    "multi_match": {
+      "query": "이레 가난소녀",
+      "type": "best_fields",
+      "fields": [
+        "title.nori^7",
+        "description.nori^3",
+        "genre^3",
+        "author^10"
+      ],
+      "tie_breaker": 0.3
+    }
+  }
+}
